@@ -9,10 +9,18 @@
     "moduleResolution": "node",
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "paths": {
+      "@utils/*": ["src/utils/*"],
+      "@pages/*": ["src/pages/*"],
+      "@support/*": ["cypress/support/*"],
+      "@fixtures/*": ["cypress/fixtures/*"]
+    }
   },
   "include": ["**/*.ts", "cypress/support/e2e.ts", "cypress/support/commands.ts"]
 }
+
 
 // {
 //   "compilerOptions": {
