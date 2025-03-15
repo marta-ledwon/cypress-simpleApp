@@ -1,5 +1,26 @@
+Cypress.Commands.add('checkFooter', () => {
+    cy.get('footer > p')
+      .should('be.visible')
+      .should('have.text', 'Created by Kristin Jackvony, Copyright 2021 ')
+      .should('have.css', 'color', 'rgb(136, 136, 136)')
+      .should('have.css', 'font-family', 'arial')
+      .should('have.css', 'font-size', '16px');
+  
+    cy.get('footer img')
+      .should('be.visible')
+      .should('have.attr', 'src', '/img/thinkingTesterLogo.png');
+  });
 
 
+  declare global {
+    namespace Cypress {
+      interface Chainable {
+        checkFooter(): Chainable<void>;
+      }
+    }
+  }
+
+  export {};
 
 // ***********************************************
 // This example commands.js shows you how to

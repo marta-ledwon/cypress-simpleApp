@@ -61,16 +61,21 @@ describe('Visit the Thinking Tester Contact List page', () => {
                             .should('have.attr', 'onclick', "location.href='/addUser'"); // sprawdzamy czy button ma atrybut przekierowujący na stronę
 })
 
-it('Verify Footer content', () => {
-  cy.get('footer > p').should('be.visible')
-                      .should('have.text', 'Created by Kristin Jackvony, Copyright 2021 ')
-                      .should('have.css', 'color', 'rgb(136, 136, 136)')
-                      .should('have.css', 'font-family', 'arial')
-                      .should('have.css', 'font-size', '16px')
-  cy.get('footer img')
-    .should('be.visible')
-    .should('have.attr', 'src', '/img/thinkingTesterLogo.png') // sprawdzenie czy to właściwy obrazek 
-    // a może dodatkowo weryfikacja obrazka ze screenshotem?
+  it('Verify Footer content', () => {
+    cy.checkFooter();
 })
+
+
+// it('Verify Footer content', () => {
+//   cy.get('footer > p').should('be.visible')
+//                       .should('have.text', 'Created by Kristin Jackvony, Copyright 2021 ')
+//                       .should('have.css', 'color', 'rgb(136, 136, 136)')
+//                       .should('have.css', 'font-family', 'arial')
+//                       .should('have.css', 'font-size', '16px')
+//   cy.get('footer img')
+//     .should('be.visible')
+//     .should('have.attr', 'src', '/img/thinkingTesterLogo.png') // sprawdzenie czy to właściwy obrazek 
+//     // a może dodatkowo weryfikacja obrazka ze screenshotem?
+// })
 
 })

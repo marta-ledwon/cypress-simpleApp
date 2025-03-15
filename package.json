@@ -15,5 +15,8 @@
     "@types/cypress": "^0.1.6",
     "cypress": "^14.2.0",
     "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^9.6.0"
   }
 }
