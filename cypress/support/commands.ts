@@ -1,3 +1,6 @@
+import {faker} from '@faker-js/faker'
+
+// WERYFIKACJA STOPKI
 Cypress.Commands.add('checkFooter', () => {
     cy.get('footer > p')
       .should('be.visible')
@@ -11,11 +14,30 @@ Cypress.Commands.add('checkFooter', () => {
       .should('have.attr', 'src', '/img/thinkingTesterLogo.png');
   });
 
+  // TWORZENIE NOWEGO UŻYTKOWNIKA
+  Cypress.Commands.add('createUser', () => {
+    const firstName = faker.name.firstName();
+    const lastName = faker.name.lastName();
+    const email = faker.internet.email();
+    const password = faker.internet.password();
+  
+    cy.visit('https://thinking-tester-contact-list.herokuapp.com/addUser');
+    cy.get('input#firstName').type(firstName);
+    cy.get('input#lastName').type(lastName);
+    cy.get('input#email').type(email);
+    cy.get('input#password').type(password);
+    cy.get('#submit').click();
+  
+    cy.url().should('eq', 'https://thinking-tester-contact-list.herokuapp.com/contactList');
+  
+    return cy.wrap({ firstName, lastName, email, password });
+  });
 
   declare global {
     namespace Cypress {
       interface Chainable {
-        checkFooter(): Chainable<void>;
+        checkFooter(): Chainable<void>
+        createUser(): Chainable<{firstName: string; lastName: string; email: string; password: string }>
       }
     }
   }
