@@ -1,6 +1,6 @@
 import {faker} from '@faker-js/faker'
 
-// WERYFIKACJA STOPKI
+// FOOTER VERIFICATION
 Cypress.Commands.add('checkFooter', () => {
     cy.get('footer > p')
       .should('be.visible')
@@ -14,7 +14,7 @@ Cypress.Commands.add('checkFooter', () => {
       .should('have.attr', 'src', '/img/thinkingTesterLogo.png');
   });
 
-  // TWORZENIE NOWEGO UŻYTKOWNIKA
+  // CREATE A NEW USER
   Cypress.Commands.add('createUser', () => {
     const firstName = faker.name.firstName();
     const lastName = faker.name.lastName();
@@ -33,11 +33,45 @@ Cypress.Commands.add('checkFooter', () => {
     return cy.wrap({ firstName, lastName, email, password });
   });
 
+  // ADD CONTACT
+  Cypress.Commands.add('addContact', () =>{
+    cy.url().should('eq', 'https://thinking-tester-contact-list.herokuapp.com/addContact');
+
+    const firstName = faker.name.firstName();
+    const lastName = faker.name.lastName();
+    const birthdate = faker.date.birthdate({min: 1900, max: 2024, mode: 'year' }).toISOString().split('T')[0];
+    const email = faker.internet.email();
+    const phone = faker.phone.number().slice(0, 15);
+    const street = faker.address.streetAddress();
+    const city = faker.address.city();
+    const stateProvince = faker.address.state();
+    const postalCode = faker.address.zipCode();
+    const country = faker.address.country();
+
+    cy.get('input#firstName').type(firstName);
+    cy.get('input#lastName').type(lastName);
+    cy.get('input#birthdate').type(birthdate);
+    cy.get('input#email').type(email);
+    cy.get('input#phone').type(phone);
+    cy.get('input#street1').type(street);
+    cy.get('input#street2').type(street);
+    cy.get('input#city').type(city);
+    cy.get('input#stateProvince').type(stateProvince);
+    cy.get('input#postalCode').type(postalCode);
+    cy.get('input#country').type(country);
+
+    cy.get('button#submit').click();
+    cy.url().should('eq', 'https://thinking-tester-contact-list.herokuapp.com/contactList');
+
+    return cy.wrap({firstName, lastName, birthdate, email, phone, street, city, stateProvince, postalCode, country})
+  })
+
   declare global {
     namespace Cypress {
       interface Chainable {
         checkFooter(): Chainable<void>
         createUser(): Chainable<{firstName: string; lastName: string; email: string; password: string }>
+        addContact(): Chainable<{firstName: string, lastName: string, birthdate: string, email: string, phone: string, street: string, city: string, stateProvince: string, postalCode: string, country: string}>
       }
     }
   }

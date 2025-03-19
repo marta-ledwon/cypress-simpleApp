@@ -48,7 +48,8 @@ describe('Visit the Thinking Tester Contact List page', () => {
   })
 
   it('Verify Sign Up content and button', () => {
-    cy.get('.main-content > :nth-child(4)').should('have.text', 'Not yet a user? Click here to sign up!')
+    cy.contains('Not yet a user? Click here to sign up!').should('be.visible')
+    //cy.get('.main-content > :nth-child(4)').should('have.text', 'Not yet a user? Click here to sign up!')
                               .should('have.css', 'color', 'rgb(51, 51, 51)')
                               .should('have.css', 'font-family', 'arial')
                               .should('have.css', 'font-size', '16px')
@@ -64,18 +65,5 @@ describe('Visit the Thinking Tester Contact List page', () => {
   it('Verify Footer content', () => {
     cy.checkFooter();
 })
-
-
-// it('Verify Footer content', () => {
-//   cy.get('footer > p').should('be.visible')
-//                       .should('have.text', 'Created by Kristin Jackvony, Copyright 2021 ')
-//                       .should('have.css', 'color', 'rgb(136, 136, 136)')
-//                       .should('have.css', 'font-family', 'arial')
-//                       .should('have.css', 'font-size', '16px')
-//   cy.get('footer img')
-//     .should('be.visible')
-//     .should('have.attr', 'src', '/img/thinkingTesterLogo.png') // sprawdzenie czy to właściwy obrazek 
-//     // a może dodatkowo weryfikacja obrazka ze screenshotem?
-// })
 
 })

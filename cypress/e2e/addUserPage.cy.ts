@@ -1,4 +1,4 @@
-// dopisać weryfikację elementów na stronie
+// dopisać weryfikację elementów na stronie!!!
 
 describe('Go to Add User page and verify elements', () => {
     beforeEach(() => {
@@ -6,7 +6,6 @@ describe('Go to Add User page and verify elements', () => {
     })
 
     it('Open thinking-tester-contact-list',() => {
-      cy.visit('https://thinking-tester-contact-list.herokuapp.com')
       cy.url().should('eq', 'https://thinking-tester-contact-list.herokuapp.com/')
     })
 
