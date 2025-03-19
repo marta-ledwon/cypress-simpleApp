@@ -22,13 +22,14 @@ describe('Registration new User, Login Create new Contact', () => {
           cy.get('.contactTableBodyRow > :nth-child(2)').should('contain.text', `${contact.firstName} ${contact.lastName}`);
           cy.get('.contactTableBodyRow > :nth-child(3)').should('contain.text', contact.birthdate);
           cy.get('.contactTableBodyRow > :nth-child(4)').should('contain.text', contact.email.toLowerCase());
-//          cy.get('.contactTableBodyRow > :nth-child(5)').should('contain.text', contact.phone);
+//        cy.get('.contactTableBodyRow > :nth-child(5)').should('contain.text', contact.phone);
           cy.get('.contactTableBodyRow > :nth-child(6)').should('contain.text', contact.street);
           cy.get('.contactTableBodyRow > :nth-child(7)').should('contain.text', `${contact.city} ${contact.stateProvince} ${contact.postalCode}`);
           cy.get(':nth-child(8)').should('contain.text', contact.country);
         })
 
         // czy kontakt jest w tabeli?
+
         cy.get('.contactTableBodyRow > :nth-child(2)').click()
         cy.url().should('eq', 'https://thinking-tester-contact-list.herokuapp.com/contactDetails');
 
@@ -37,7 +38,7 @@ describe('Registration new User, Login Create new Contact', () => {
         cy.url().should('eq', 'https://thinking-tester-contact-list.herokuapp.com/editContact');
 
         const newLastName = faker.person.lastName();
-
+        // usuń nazwisko i podaj nowe
         cy.get('input#lastName').clear().type('{selectall}{backspace}').type(newLastName);
         cy.get('button#submit').click();
 
@@ -49,12 +50,14 @@ describe('Registration new User, Login Create new Contact', () => {
 
         cy.get('.contactTableBodyRow > :nth-child(2)').should('contain.text', `${newLastName}`);
 
-        cy.get('.contactTableBodyRow > :nth-child(2)').click();
+        // usuń kontakt
+        cy.get('.contactTable').contains(`${newLastName}`).click();
         cy.url().should('eq', 'https://thinking-tester-contact-list.herokuapp.com/contactDetails');
         cy.get('#delete').click()
         cy.url().should('eq', 'https://thinking-tester-contact-list.herokuapp.com/contactList');
-
-        cy.get('#myTable').should('not.contain.text', `${newLastName}`); ////?????
+        
+        // sprawdzenie czy usunięto kontakt z tabeli
+        cy.get('.contactTable').should('not.contain.text', `${newLastName}`);
       });
     })
   })
