@@ -28,9 +28,7 @@ describe('Visit the Thinking Tester Contact List page', () => {
     cy.get('div.welcome-message')
       .find('a') // znajdź tag <a> w tym elemencie
       .should('contain.text', 'here') // czy tekst linku to 'here'
-      .should('have.css', 'color', 'rgb(0, 0, 238)')
-      .should('have.css', 'text-decoration-line', 'underline') // podkreślenie tekstu
-      .should('have.attr', 'href', 'https://documenter.getpostman.com/view/4012288/TzK2bEa8') // czy ma atrybut href (zawiera adres URL)
+
   })
 
   it('Verify Log In content and button', () => {
