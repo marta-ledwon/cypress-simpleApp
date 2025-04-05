@@ -41,7 +41,9 @@ Cypress.Commands.add('checkFooter', () => {
     const lastName = faker.name.lastName();
     const birthdate = faker.date.birthdate({min: 1900, max: 2024, mode: 'year' }).toISOString().split('T')[0];
     const email = faker.internet.email();
-    const phone = faker.phone.number().slice(0, 15);
+    let phone = faker.phone.number().slice(0, 15)
+    phone = phone.replace(/\D/g, '')
+    console.log(phone)
     const street = faker.address.streetAddress();
     const city = faker.address.city();
     const stateProvince = faker.address.state();
@@ -54,7 +56,7 @@ Cypress.Commands.add('checkFooter', () => {
     cy.get('input#email').type(email);
     cy.get('input#phone').type(phone);
     cy.get('input#street1').type(street);
-    cy.get('input#street2').type(street);
+    cy.get('input#street2').type('Kredowa');
     cy.get('input#city').type(city);
     cy.get('input#stateProvince').type(stateProvince);
     cy.get('input#postalCode').type(postalCode);
