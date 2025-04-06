@@ -32,9 +32,15 @@ describe('User Registration API Test', () => {
       );
       expect(response.body).to.have.property('token');
 
-      // Storing email, password, and token as ALIASES
-      cy.wrap(userEmail).as('userEmail');
-      cy.wrap(userPassword).as('userPassword');
+      Cypress.env('userEmail', userEmail);
+      Cypress.env('userPassword', userPassword);
+
+      const userData = {
+        email: userEmail,
+        password: userPassword
+      };
+      
+      cy.writeFile('cypress/fixtures/tempUser.json', userData);
 
     });
   });
