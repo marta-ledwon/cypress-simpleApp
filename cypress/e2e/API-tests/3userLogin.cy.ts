@@ -13,6 +13,7 @@ describe('User Login', () => {
             },
 
           failOnStatusCode: true,
+
         }).then((response) => {
           console.log(response);
   
@@ -21,11 +22,11 @@ describe('User Login', () => {
           expect(response.body).to.have.property('user');
           expect(response.body).to.have.property('token');
 
-          const bearAuthToken = {
-            authToken: response.body.token,
+          const tokenData = {
+            token: `Bearer ${response.body.token}`
           };
   
-          cy.writeFile('cypress/fixtures/tempUser.json', bearAuthToken);
+          cy.writeFile('cypress/fixtures/tempToken.json', tokenData);
         });
       });
     });

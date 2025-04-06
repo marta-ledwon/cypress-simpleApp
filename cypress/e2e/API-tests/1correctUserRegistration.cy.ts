@@ -44,4 +44,4 @@ describe('User Registration API Test', () => {
 
     });
   });
-});
+})

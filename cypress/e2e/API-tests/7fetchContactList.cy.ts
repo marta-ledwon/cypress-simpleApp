@@ -2,22 +2,22 @@ describe('Fetch Contacts List', () => {
     const baseUrl = 'https://thinking-tester-contact-list.herokuapp.com';
   
     it('Return status 200 and a list of contacts', () => {
-      // Retrieving the token from the environment variable
-      const authToken = Cypress.env('authToken');
-  
+
+      cy.fixture('tempToken.json').then((auth) => {
+
       cy.request({
         method: 'GET',
         url: `${baseUrl}/contacts/`,
         headers: {
-          'Authorization': `Bearer ${authToken}`
+          'Authorization': auth.token
         }
+
       }).then((response) => {
         
         expect(response.status).to.eq(200);
-  
         expect(response.body).to.be.an('array');
-
-        expect(response.body.length).to.eq(0)
+        expect(response.body.length).to.eq(1)
       });
     });
   });
+})

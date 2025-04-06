@@ -15,12 +15,13 @@ describe('Add New contact', () => {
       const randomContactPostalCode = Math.floor(Math.random() * 100000);
       const randomContactCountry = `Country${Math.floor(Math.random() * 50)}`;
     
-      cy.request({
-        method: 'POST',
-        url: `${baseUrl}/contacts`,
-        headers: {
-          Authorization: `Bearer ${Cypress.env('authToken')}`
-        },
+      cy.fixture('tempToken.json').then((auth) => {
+        cy.request({
+          method: 'POST',
+          url: `${baseUrl}/contacts`,
+          headers: {
+            Authorization: auth.token
+          },
         body: {
           firstName: randomContactFirstName,
           lastName: randomContactLastName,
@@ -34,6 +35,7 @@ describe('Add New contact', () => {
           postalCode: randomContactPostalCode,
           country: randomContactCountry
         }
+        
       }).then((response) => {
 
         expect(response.status).to.eq(201);
@@ -53,9 +55,14 @@ describe('Add New contact', () => {
         expect(response.body).to.have.property('owner');
         expect(response.body).to.have.property('__v');
 
-    // Storing the new contact ID in an environment variable
-    Cypress.env('contactId', response.body._id);
+        const idContact = {
+          id: response.body._id
+        };
+
+    cy.writeFile('cypress/fixtures/idContact.json', idContact);
+    
       });
     });
   });
+})
   
