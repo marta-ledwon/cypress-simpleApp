@@ -1,5 +1,15 @@
 import {faker} from '@faker-js/faker'
 
+declare global{
+  namespace Cypress{
+    interface Chainable{
+      checkFooter():void
+    }
+  }
+}
+
+export{}
+
 // FOOTER VERIFICATION
 Cypress.Commands.add('checkFooter', () => {
     cy.get('footer > p')

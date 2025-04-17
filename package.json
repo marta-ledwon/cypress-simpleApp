@@ -12,8 +12,13 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^22.0.1",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.4",
     "@types/cypress": "^0.1.6",
-    "cypress": "^14.2.0",
+    "@types/jest": "^29.5.14",
+    "@types/mocha": "^10.0.10",
+    "cypress": "^14.3.0",
+    "esbuild": "^0.25.2",
     "typescript": "^5.8.2"
   },
   "dependencies": {
