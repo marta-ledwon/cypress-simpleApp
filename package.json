@@ -5,7 +5,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "cy:open": "cypress open",
-    "cy:run": "cypress run"
+    "cy:run": "cypress run",
+    "cy:api:open": "TEST_SUITE=api npx cypress open",
+    "cy:api:run": "TEST_SUITE=api npx cypress run",
+    "cy:bdd:open": "TEST_SUITE=bdd npx cypress open",
+    "cy:bdd:run": "TEST_SUITE=bdd npx cypress run",
+    "cy:e2e:open": "TEST_SUITE=e2e npx cypress open",
+    "cy:e2e:run": "TEST_SUITE=e2e npx cypress run"
   },
   "keywords": [],
   "author": "",
