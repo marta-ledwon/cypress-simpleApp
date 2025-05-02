@@ -10,6 +10,7 @@ const specPatterns = {
   api: 'cypress/e2e/API-tests/**/*.ts',
   bdd: 'cypress/e2e/BDD-tests/**/*.feature',
   e2e: 'cypress/e2e/E2E-tests/**/*.ts',
+  all: 'cypress/e2e',
 }
 
 module.exports = defineConfig({
